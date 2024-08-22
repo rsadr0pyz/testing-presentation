@@ -1,31 +1,37 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
-  });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+    let fixture : ComponentFixture<AppComponent>
 
-  it(`should have as title 'testing-presentation'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('testing-presentation');
-  });
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [AppComponent],
+            schemas: [NO_ERRORS_SCHEMA]
+        }).compileComponents()
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('testing-presentation app is running!');
-  });
+        fixture = TestBed.createComponent(AppComponent)
+        fixture.detectChanges()
+    })
+    
+    
+    it("initiates with zero", () => {
+        expect(fixture.componentInstance.counterVal).toEqual(0) 
+        //Teste ruim pois checa a implementação, não o comportamento, e se a variavel mudasse?
+    })
+
+    it("initiates with zero 1", () => {
+        let el = fixture.debugElement.query(By.css(`[data-testid="counter-out1"]`))
+        expect(el.nativeElement.innerHTML).toEqual("How many times was button clicked: 0") 
+        //Teste ruim pois checa a implementação, não o comportamento, e se o texto mudasse?
+    })
+
+    it("initiates with zero 2", () => {
+        let el = fixture.debugElement.query(By.css(`[data-testid="counter-out2"]`))
+        expect(el.nativeElement.innerHTML).toEqual('0') 
+    })
+
 });

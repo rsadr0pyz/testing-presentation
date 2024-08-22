@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'testing-presentation';
+    counterVal = 0
+
+
+    onCounterIncrease(counter : number){
+        this.counterVal = counter;
+    }
 }
