@@ -9,7 +9,7 @@ export class AppComponent {
     buttonClicked = 0
 
 
-    onCounterIncrease(counter : number){
-        this.buttonClicked = counter;
+    onCounterChange(counter : number){
+        this.buttonClicked++;
     }
 }
