@@ -18,5 +18,10 @@ export class CounterComponent {
         this.actualValEvent.emit(this.actualVal);
     }
 
+    public decrement(){
+      this.actualVal--;
+      this.actualValEvent.emit(this.actualVal);
+  }
+
 
 }
