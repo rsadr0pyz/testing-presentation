@@ -32,12 +32,12 @@ describe('AppComponent', () => {
         let counter : MockedCounterComponent = counterEl.componentInstance
 
         //Como é um teste de unidade, não temos acesso aos botões do componente
-        counter.actualValEvent.emit(4)
+        counter.actualValEvent.emit(1)
         
         fixture.detectChanges() // NAO ESQUECER DISSO
 
         let el = fixture.debugElement.query(By.css(`[data-testid="button-clicked-amount"]`))
-        expect(el.nativeElement.innerHTML).toEqual('4') 
+        expect(el.nativeElement.innerHTML).toEqual('1') 
     })
 
 });
@@ -68,7 +68,8 @@ describe("AppComponent Integration", () => {
             buttonsClicked++
         }
 
-        expect(el.nativeElement.innerHTML).toEqual(buttonsClicked) 
+        fixture.detectChanges()
+        expect(el.nativeElement.innerHTML).toEqual(`${buttonsClicked}`) 
     })
 
 

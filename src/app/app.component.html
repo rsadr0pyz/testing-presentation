@@ -1,4 +1,4 @@
-<p>How many times was button clicked:  <span data-testid = "button-clicked-amount">{{counterVal}}</span></p>
+<p>How many times was button clicked:  <span data-testid = "button-clicked-amount">{{buttonClicked}}</span></p>
 
 
-<app-counter (actualVal)="onCounterIncrease($event)"></app-counter>
+<app-counter (actualVal)="onCounterChange($event)"></app-counter>

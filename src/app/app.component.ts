@@ -6,10 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    counterVal = 0
+    buttonClicked = 0
 
 
-    onCounterIncrease(counter : number){
-        this.counterVal = counter;
+    onCounterChange(counter : number){
+        this.buttonClicked++;
     }
 }
