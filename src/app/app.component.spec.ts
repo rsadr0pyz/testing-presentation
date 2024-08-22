@@ -77,7 +77,6 @@ describe("AppComponent Integration", () => {
         }
 
         fixture.detectChanges()
-
         expect(el.nativeElement.innerHTML).toEqual(`${buttonsClicked}`) 
     })
 
