@@ -1,37 +1,40 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { MockedCounterComponent } from "./spec-helpers/counter.mock.component"
 
 describe('AppComponent', () => {
 
     let fixture : ComponentFixture<AppComponent>
+    let counterEl : DebugElement
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [AppComponent],
+            declarations: [AppComponent, MockedCounterComponent],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents()
 
         fixture = TestBed.createComponent(AppComponent)
         fixture.detectChanges()
+        counterEl = fixture.debugElement.query(By.directive(MockedCounterComponent))
     })
-    
-    
+
     it("initiates with zero", () => {
-        expect(fixture.componentInstance.counterVal).toEqual(0) 
-        //Teste ruim pois checa a implementação, não o comportamento, e se a variavel mudasse?
-    })
-
-    it("initiates with zero 1", () => {
-        let el = fixture.debugElement.query(By.css(`[data-testid="counter-out1"]`))
-        expect(el.nativeElement.innerHTML).toEqual("How many times was button clicked: 0") 
-        //Teste ruim pois checa a implementação, não o comportamento, e se o texto mudasse?
-    })
-
-    it("initiates with zero 2", () => {
-        let el = fixture.debugElement.query(By.css(`[data-testid="counter-out2"]`))
+        let el = fixture.debugElement.query(By.css(`[data-testid="button-clicked-amount"]`))
         expect(el.nativeElement.innerHTML).toEqual('0') 
+    })
+
+    it("Displays the correct amount of buttons clicks", () => {
+        let counter : MockedCounterComponent = counterEl.componentInstance
+
+        //Como é um teste de unidade, não temos acesso aos botões do componente
+        counter.actualValEvent.emit(4)
+        
+        fixture.detectChanges() // NAO ESQUECER DISSO
+
+        let el = fixture.debugElement.query(By.css(`[data-testid="button-clicked-amount"]`))
+        expect(el.nativeElement.innerHTML).toEqual('4') 
     })
 
 });
